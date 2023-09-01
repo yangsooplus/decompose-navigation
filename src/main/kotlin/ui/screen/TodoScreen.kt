@@ -10,16 +10,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import ui.Todo
 import ui.TodoItem
-import ui.viewmodel.TodoViewModel
+import ui.navigation.MyChildComponent
 
 @Composable
 fun TodoScreen(
-    viewModel: TodoViewModel,
+    component: MyChildComponent,
     modifier: Modifier = Modifier,
     onItemClick: () -> Unit
 ) {
+    val viewModel by component.viewModel.subscribeAsState()
+
     var text by remember { mutableStateOf("") }
     val uiState by viewModel.uiState.collectAsState()
 

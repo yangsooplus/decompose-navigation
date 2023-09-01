@@ -13,14 +13,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
-import ui.viewmodel.TodoViewModel
+import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
+import ui.navigation.MyChildComponent
 
 @Composable
 fun DetailScreen(
-    viewModel: TodoViewModel,
+    component: MyChildComponent,
     modifier: Modifier = Modifier,
     onBack: () -> Unit
 ) {
+    val viewModel by component.viewModel.subscribeAsState()
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
